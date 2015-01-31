@@ -27,6 +27,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 
 import android.os.Bundle;
@@ -48,6 +49,8 @@ public class MainActivity extends ActionBarActivity {
 	EditText bounds_input;
 	EditText walls_input;
 	
+	private Boolean finished;
+	
 	private String[] hexcodes = {"#88FF0000","#88FF1100","#88FF2300","#88FF3400",
 			"#88FF4600","#88FF5700","#88FF6900","#88FF7B00","#88FF8C00","#88FF9E00",
 			"#88FFAF00","#88FFC100","#88FFD300","#88FFE400","#88FFF600","#88F7FF00",
@@ -64,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.starting_screen);
         
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        
+        finished = false;
         bounds_input = (EditText)findViewById(R.id.bounds_field);
         walls_input = (EditText)findViewById(R.id.num_Walls);
         
@@ -133,10 +136,29 @@ public class MainActivity extends ActionBarActivity {
     public void Next_Screen(View view){
     	bounds_input = (EditText)findViewById(R.id.bounds_field);
         walls_input = (EditText)findViewById(R.id.num_Walls);
+        
+        finished = false;
          
     	setContentView(R.layout.activity_main);
         getWindow().getDecorView().setBackgroundColor(Color.parseColor("#8800FF00"));
-    	
+        
+        final TextView timer = (TextView)findViewById(R.id.timer);
+        
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                timer.setText("done!");
+                if (finished == false){
+                	setContentView(R.layout.end_screen_fail);
+                	getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+                }
+            }
+         }.start();
+        
         bounds = Integer.parseInt(bounds_input.getText().toString());
         walls = Integer.parseInt(walls_input.getText().toString());
         grid = new Grid(bounds);
@@ -161,6 +183,7 @@ public class MainActivity extends ActionBarActivity {
 
     	if (dist == 0){
     		setContentView(R.layout.end_screen);
+    		getWindow().getDecorView().setBackgroundColor(Color.WHITE);
     	}else{
     		s.start(bounds, grid.getGrid());
     		Log.d("tag", "" + dist);
@@ -181,6 +204,8 @@ public class MainActivity extends ActionBarActivity {
 
     	if (dist == 0){
     		setContentView(R.layout.end_screen);
+    		getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+    		finished = true;
     	}else{
     		s.start(bounds, grid.getGrid());
     		Log.d("tag", "" + dist);
@@ -200,6 +225,8 @@ public class MainActivity extends ActionBarActivity {
 
     	if (dist == 0){
     		setContentView(R.layout.end_screen);
+    		getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+    		finished = true;
     	}else{
     		s.start(bounds, grid.getGrid());
     		Log.d("tag", "" + dist);
@@ -219,6 +246,8 @@ public class MainActivity extends ActionBarActivity {
   
     	if (dist == 0){
     		setContentView(R.layout.end_screen);
+    		getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+    		finished = true;
     	}else{
     		s.start(bounds, grid.getGrid());
     		Log.d("tag", "" + dist);
