@@ -11,8 +11,29 @@
         android:text="Start"
         android:onClick = "Next_Screen" />
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grid Bounds:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <EditText
         android:id="@+id/bounds_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of Walls:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/num_Walls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

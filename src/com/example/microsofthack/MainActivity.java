@@ -25,8 +25,10 @@ public class MainActivity extends ActionBarActivity {
 	private Player p1;
 	private Grid grid;
 	private int bounds;
+	private int walls;
 	Vibrator v;
 	EditText bounds_input;
+	EditText walls_input;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         
         bounds_input = (EditText)findViewById(R.id.bounds_field);
-
+        walls_input = (EditText)findViewById(R.id.num_Walls);
         
     }
 
@@ -51,9 +53,10 @@ public class MainActivity extends ActionBarActivity {
         
         
         bounds = Integer.parseInt(bounds_input.getText().toString());
+        walls = Integer.parseInt(walls_input.getText().toString());
         grid = new Grid(bounds);
         p1 = new Player(0,0);
-        grid.setWalls(2);
+        grid.setWalls(walls);
     }
     
     public void Button_UP(View view){
