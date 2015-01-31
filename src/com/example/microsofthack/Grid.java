@@ -1,5 +1,7 @@
 package com.example.microsofthack;
 
+import java.util.Random;
+
 public class Grid {
 	
 	private int max_Bounds;
@@ -20,5 +22,16 @@ public class Grid {
 	}
 	public Boolean[][] getGrid(){
 		return grid;
+	}
+	public void setWalls(int n){
+		Random rand = new Random();
+		rand.setSeed(System.currentTimeMillis());
+		for (int i = 0; i < n; i++){
+			
+			int x = rand.nextInt(max_Bounds);
+			int y = rand.nextInt(max_Bounds);
+			grid[x][y] = true;
+			
+		}
 	}
 }

@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.content.Context;
 import android.os.Vibrator;
 
 import android.os.Bundle;
@@ -22,16 +23,17 @@ public class MainActivity extends ActionBarActivity {
 	private Player p1;
 	private Grid grid;
 	private int bounds;
-	
+	Vibrator v;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.starting_screen);
-        
+        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         
         bounds = 5;
         grid = new Grid(bounds);
         p1 = new Player(0,0);
+        grid.setWalls(2);
         
     }
 
@@ -50,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
     	Log.d("tag", "Up Button was PRESSED");
     	Boolean check = p1.swipe_Up(bounds, grid.getGrid());
     	if (!check){
-    		
+    		v.vibrate(500);
     	}
     	Log.d("tag", p1.getX() + "-" + p1.getY());
     	
@@ -58,16 +60,25 @@ public class MainActivity extends ActionBarActivity {
     public void Button_DOWN(View view){
     	Log.d("tag", "Down Button was PRESSED");
     	Boolean check = p1.swipe_Down(grid.getGrid());
+    	if (!check){
+    		v.vibrate(500);
+    	}
     	Log.d("tag", p1.getX() + "-" + p1.getY());
     }
     public void Button_RIGHT(View view){
     	Log.d("tag", "Right Button was PRESSED");
     	Boolean check = p1.swipe_Right(bounds, grid.getGrid());
+    	if (!check){
+    		v.vibrate(500);
+    	}
     	Log.d("tag", p1.getX() + "-" + p1.getY());
     }
     public void Button_LEFT(View view){
     	Log.d("tag", "Left Button was PRESSED");
     	Boolean check = p1.swipe_Left(grid.getGrid());
+    	if (!check){
+    		v.vibrate(500);
+    	}
     	Log.d("tag", p1.getX() + "-" + p1.getY());
     }
     
