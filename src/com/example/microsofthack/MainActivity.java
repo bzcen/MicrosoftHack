@@ -4,11 +4,13 @@ import android.support.v7.app.ActionBarActivity;
 
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.MotionEventCompat;
+import android.text.Editable;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Context;
 import android.os.Vibrator;
@@ -24,16 +26,16 @@ public class MainActivity extends ActionBarActivity {
 	private Grid grid;
 	private int bounds;
 	Vibrator v;
+	EditText bounds_input;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.starting_screen);
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         
-        bounds = 5;
-        grid = new Grid(bounds);
-        p1 = new Player(0,0);
-        grid.setWalls(2);
+        bounds_input = (EditText)findViewById(R.id.bounds_field);
+
         
     }
 
@@ -46,6 +48,12 @@ public class MainActivity extends ActionBarActivity {
     }
     public void Next_Screen(View view){
     	setContentView(R.layout.activity_main);
+        
+        
+        bounds = Integer.parseInt(bounds_input.getText().toString());
+        grid = new Grid(bounds);
+        p1 = new Player(0,0);
+        grid.setWalls(2);
     }
     
     public void Button_UP(View view){

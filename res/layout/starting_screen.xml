@@ -11,4 +11,14 @@
         android:text="Start"
         android:onClick = "Next_Screen" />
 
+    <EditText
+        android:id="@+id/bounds_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
 </LinearLayout>
