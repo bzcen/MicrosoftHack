@@ -24,6 +24,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.os.Vibrator;
@@ -47,6 +48,13 @@ public class MainActivity extends ActionBarActivity {
 	EditText bounds_input;
 	EditText walls_input;
 	
+	private String[] hexcodes = {"#88FF0000","#88FF1100","#88FF2300","#88FF3400",
+			"#88FF4600","#88FF5700","#88FF6900","#88FF7B00","#88FF8C00","#88FF9E00",
+			"#88FFAF00","#88FFC100","#88FFD300","#88FFE400","#88FFF600","#88F7FF00",
+			"#88E5FF00","#88D4FF00","#88C2FF00","#88B0FF00","#889FFF00","#888DFF00",
+			"#887CFF00","#886AFF00","#8858FF00","#8847FF00","#8835FF00","#8824FF00",
+			"#8812FF00","#8800FF00"};
+	
 	private BluetoothAdapter BA;
 	private Set<BluetoothDevice>pairedDevices;
 
@@ -54,6 +62,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.starting_screen);
+        
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         
         bounds_input = (EditText)findViewById(R.id.bounds_field);
@@ -126,8 +135,8 @@ public class MainActivity extends ActionBarActivity {
         walls_input = (EditText)findViewById(R.id.num_Walls);
          
     	setContentView(R.layout.activity_main);
-        
-        
+        getWindow().getDecorView().setBackgroundColor(Color.parseColor("#8800FF00"));
+    	
         bounds = Integer.parseInt(bounds_input.getText().toString());
         walls = Integer.parseInt(walls_input.getText().toString());
         grid = new Grid(bounds);
@@ -137,6 +146,7 @@ public class MainActivity extends ActionBarActivity {
     }
     public void replay(View view){
     	setContentView(R.layout.starting_screen);
+    	getWindow().getDecorView().setBackgroundColor(Color.WHITE);
     }
     
     public void Button_UP(View view){
@@ -146,13 +156,18 @@ public class MainActivity extends ActionBarActivity {
     		v.vibrate(500);
     	}
     	Log.d("tag", p1.getX() + "-" + p1.getY());
+    	
     	double dist = p1.check_Dist(s.getX(), s.getY());
+
     	if (dist == 0){
     		setContentView(R.layout.end_screen);
     	}else{
     		s.start(bounds, grid.getGrid());
+    		Log.d("tag", "" + dist);
+    		String hex = dist_to_hex(dist);
+    		Log.d("tag", hex);
+    		getWindow().getDecorView().setBackgroundColor(Color.parseColor(hex));
     	}
-    	
     	
     }
     public void Button_DOWN(View view){
@@ -163,10 +178,15 @@ public class MainActivity extends ActionBarActivity {
     	}
     	Log.d("tag", p1.getX() + "-" + p1.getY());
     	double dist = p1.check_Dist(s.getX(), s.getY());
+
     	if (dist == 0){
     		setContentView(R.layout.end_screen);
     	}else{
     		s.start(bounds, grid.getGrid());
+    		Log.d("tag", "" + dist);
+    		String hex = dist_to_hex(dist);
+    		Log.d("tag", hex);
+    		getWindow().getDecorView().setBackgroundColor(Color.parseColor(hex));
     	}
     }
     public void Button_RIGHT(View view){
@@ -177,10 +197,15 @@ public class MainActivity extends ActionBarActivity {
     	}
     	Log.d("tag", p1.getX() + "-" + p1.getY());
     	double dist = p1.check_Dist(s.getX(), s.getY());
+
     	if (dist == 0){
     		setContentView(R.layout.end_screen);
     	}else{
     		s.start(bounds, grid.getGrid());
+    		Log.d("tag", "" + dist);
+    		String hex = dist_to_hex(dist);
+    		Log.d("tag", hex);
+    		getWindow().getDecorView().setBackgroundColor(Color.parseColor(hex));
     	}
     }
     public void Button_LEFT(View view){
@@ -191,11 +216,19 @@ public class MainActivity extends ActionBarActivity {
     	}
     	Log.d("tag", p1.getX() + "-" + p1.getY());
     	double dist = p1.check_Dist(s.getX(), s.getY());
+  
     	if (dist == 0){
     		setContentView(R.layout.end_screen);
     	}else{
     		s.start(bounds, grid.getGrid());
+    		Log.d("tag", "" + dist);
+    		String hex = dist_to_hex(dist);
+    		Log.d("tag", hex);
+    		getWindow().getDecorView().setBackgroundColor(Color.parseColor(hex));
     	}
+    }
+    public String dist_to_hex(double dist){
+    	return hexcodes[(int)Math.round(dist*30/ (bounds*1.4))];
     }
     
     
