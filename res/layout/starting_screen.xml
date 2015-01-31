@@ -42,4 +42,32 @@
         <requestFocus />
     </EditText>
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth ON"
+        android:onClick = "Bluetooth_ON" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth OFF"
+        android:onClick = "Bluetooth_OFF" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Become Visible"
+        android:onClick = "visible" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List Paired Devices"
+        android:onClick = "list" />
+
 </LinearLayout>

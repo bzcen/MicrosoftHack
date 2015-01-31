@@ -63,4 +63,8 @@ public class Player {
 			return false;
 		}
 	}
+	public double check_Dist(int x, int y){
+		double sum = Math.pow(x-getX(),2) + Math.pow(y-getY(), 2);
+		return Math.sqrt(sum);
+	}
 }
